@@ -34,3 +34,12 @@ resources = {
 # TODO 3 : process coins
 # TODO 4 : check transaction successful
 # TODO 5: make coffee
+user_input = input("What would you like? (espresso/latte/cappuccino): ").strip()
+money = 0
+def report():
+    print(f"Water : {resources["water"]}ml")
+    print(f"Milk : {resources["milk"]}ml")
+    print(f"Coffee : {resources["coffee"]}g")
+    print(f"Money : ${money}")
+if user_input == "report":
+    report()
