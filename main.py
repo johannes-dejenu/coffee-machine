@@ -35,9 +35,9 @@ resources = {
 # TODO 4 : check transaction successful
 # TODO 5: make coffee
 want_coffee = True
+money = 0
 while want_coffee:
     user_input = input("What would you like? (espresso/latte/cappuccino): ").strip()
-    money = 0
     total = 0
     def report():
         print(f"Water : {resources["water"]}ml")
@@ -49,16 +49,18 @@ while want_coffee:
     elif user_input == "report":
         report()
     elif user_input in MENU:
+        money += MENU[user_input]["cost"]
         for i in MENU[user_input]["ingredients"]:
             if resources["water"] < MENU[user_input]["ingredients"]["water"]:
                 print("Sorry there is not enough water.")
                 want_coffee = False
-            elif resources["milk"] < MENU[user_input]["ingredients"]["milk"]:
-                print("Sorry there is not enough milk.")
-                want_coffee = False
             elif resources["coffee"] < MENU[user_input]["ingredients"]["coffee"]:
                 print("Sorry there is not enough coffee.")
                 want_coffee = False
+            if "milk" in MENU[user_input]["ingredients"]:
+                if resources["milk"] < MENU[user_input]["ingredients"]["milk"]:
+                    print("Sorry there is not enough milk.")
+                    want_coffee = False
         resources["water"] = resources["water"] - MENU[user_input]["ingredients"]["water"]
         resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
         resources["coffee"] = resources["coffee"] - MENU[user_input]["ingredients"]["coffee"]
@@ -72,7 +74,6 @@ while want_coffee:
         quarters, dimes, nickles, pennies = process_coins()
         total += 0.25 * quarters + 0.1 * dimes + 0.05 * nickles + 0.01 * pennies
         total_1 = round(total, 2)
-        money += total_1
         change = total_1 - MENU[user_input]["cost"]
         change = round(change, 2)
         if total_1 < MENU[user_input]["cost"]:
@@ -80,5 +81,6 @@ while want_coffee:
         else:
             if total_1 > MENU[user_input]["cost"]:
                 print(f"Here is ${change} dollars in change.")
+                print(f"Here is your {user_input}. Enjoy!")
 
 
