@@ -53,8 +53,16 @@ if user_input in MENU:
             print("Sorry there is not enough coffee.")
 def process_coins():
     print("Please insert coins.")
-    quarters = input("how many quarters?: ")
-    dimes = input("how many dimes?: ")
-    nickles = input("how many nickles?: ")
-    pennies = input("how many pennies?: ")
-    return quarters, dimes, nickles, pennies
+    quarter = int(input("how many quarters?: "))
+    dime = int(input("how many dimes?: "))
+    nickle = int(input("how many nickles?: "))
+    penny = int(input("how many pennies?: "))
+    return quarter, dime, nickle, penny
+quarters, dimes, nickles, pennies = process_coins()
+total = 0.25 * quarters + 0.1 * dimes + 0.05 * nickles + 0.01 * pennies
+total = round(total, 2)
+if total < MENU[user_input]["cost"]:
+    print("Sorry that's not enough. Money refunded.")
+else:
+    money += total
+
