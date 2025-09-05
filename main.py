@@ -43,3 +43,18 @@ def report():
     print(f"Money : ${money}")
 if user_input == "report":
     report()
+if user_input in MENU:
+    for i in MENU["latte"]["ingredients"]:
+        if resources["water"] < MENU[user_input]["ingredients"]["water"]:
+            print("Sorry there is not enough water.")
+        elif resources["milk"] < MENU[user_input]["ingredients"]["milk"]:
+            print("Sorry there is not enough milk.")
+        elif resources["coffee"] < MENU[user_input]["ingredients"]["coffee"]:
+            print("Sorry there is not enough coffee.")
+def process_coins():
+    print("Please insert coins.")
+    quarters = input("how many quarters?: ")
+    dimes = input("how many dimes?: ")
+    nickles = input("how many nickles?: ")
+    pennies = input("how many pennies?: ")
+    return quarters, dimes, nickles, pennies
