@@ -38,7 +38,6 @@ want_coffee = True
 money = 0
 while want_coffee:
     user_input = input("What would you like? (espresso/latte/cappuccino): ").strip()
-    total = 0
     def report():
         print(f"Water : {resources["water"]}ml")
         print(f"Milk : {resources["milk"]}ml")
@@ -53,18 +52,18 @@ while want_coffee:
         for i in MENU[user_input]["ingredients"]:
             if resources["water"] < MENU[user_input]["ingredients"]["water"]:
                 print("Sorry there is not enough water.")
-                want_coffee = False
+                break
             elif resources["coffee"] < MENU[user_input]["ingredients"]["coffee"]:
                 print("Sorry there is not enough coffee.")
-                want_coffee = False
+                break
             elif "milk" in MENU[user_input]["ingredients"]:
                 if resources["milk"] < MENU[user_input]["ingredients"]["milk"]:
                     print("Sorry there is not enough milk.")
-                    want_coffee = False
-        resources["water"] = resources["water"] - MENU[user_input]["ingredients"]["water"]
-        if "milk" in MENU[user_input]["ingredients"]:
-            resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
-        resources["coffee"] = resources["coffee"] - MENU[user_input]["ingredients"]["coffee"]
+                    break
+            resources["water"] = resources["water"] - MENU[user_input]["ingredients"]["water"]
+            if "milk" in MENU[user_input]["ingredients"]:
+                resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
+            resources["coffee"] = resources["coffee"] - MENU[user_input]["ingredients"]["coffee"]
         def process_coins():
             print("Please insert coins.")
             quarter = int(input("how many quarters?: "))
@@ -73,7 +72,7 @@ while want_coffee:
             penny = int(input("how many pennies?: "))
             return quarter, dime, nickle, penny
         quarters, dimes, nickles, pennies = process_coins()
-        total += 0.25 * quarters + 0.1 * dimes + 0.05 * nickles + 0.01 * pennies
+        total = 0.25 * quarters + 0.1 * dimes + 0.05 * nickles + 0.01 * pennies
         total_1 = round(total, 2)
         change = total_1 - MENU[user_input]["cost"]
         change = round(change, 2)
