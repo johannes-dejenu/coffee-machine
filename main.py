@@ -57,12 +57,13 @@ while want_coffee:
             elif resources["coffee"] < MENU[user_input]["ingredients"]["coffee"]:
                 print("Sorry there is not enough coffee.")
                 want_coffee = False
-            if "milk" in MENU[user_input]["ingredients"]:
+            elif "milk" in MENU[user_input]["ingredients"]:
                 if resources["milk"] < MENU[user_input]["ingredients"]["milk"]:
                     print("Sorry there is not enough milk.")
                     want_coffee = False
         resources["water"] = resources["water"] - MENU[user_input]["ingredients"]["water"]
-        resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
+        if "milk" in MENU[user_input]["ingredients"]:
+            resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
         resources["coffee"] = resources["coffee"] - MENU[user_input]["ingredients"]["coffee"]
         def process_coins():
             print("Please insert coins.")
