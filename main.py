@@ -36,13 +36,20 @@ resources = {
 # TODO 5: make coffee
 want_coffee = True
 money = 0
-while want_coffee:
-    user_input = input("What would you like? (espresso/latte/cappuccino): ").strip()
-    def report():
+def report():
         print(f"Water : {resources["water"]}ml")
         print(f"Milk : {resources["milk"]}ml")
         print(f"Coffee : {resources["coffee"]}g")
         print(f"Money : ${money}")
+def process_coins():
+    print("Please insert coins.")
+    quarter = int(input("how many quarters?: "))
+    dime = int(input("how many dimes?: "))
+    nickle = int(input("how many nickles?: "))
+    penny = int(input("how many pennies?: "))
+    return quarter, dime, nickle, penny
+while want_coffee:
+    user_input = input("What would you like? (espresso/latte/cappuccino): ").strip()
     if user_input == "off":
         want_coffee = False
     elif user_input == "report":
@@ -64,13 +71,6 @@ while want_coffee:
             if "milk" in MENU[user_input]["ingredients"]:
                 resources["milk"] = resources["milk"] - MENU[user_input]["ingredients"]["milk"]
             resources["coffee"] = resources["coffee"] - MENU[user_input]["ingredients"]["coffee"]
-        def process_coins():
-            print("Please insert coins.")
-            quarter = int(input("how many quarters?: "))
-            dime = int(input("how many dimes?: "))
-            nickle = int(input("how many nickles?: "))
-            penny = int(input("how many pennies?: "))
-            return quarter, dime, nickle, penny
         quarters, dimes, nickles, pennies = process_coins()
         total = 0.25 * quarters + 0.1 * dimes + 0.05 * nickles + 0.01 * pennies
         total_1 = round(total, 2)
